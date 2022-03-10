@@ -24,8 +24,8 @@ Route::middleware('jwt.auth')->prefix('v1')->group( function () {
     Route::post('/logout',  [AuthController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('/me',      [AuthController::class, 'me'])->name('me');
-
-    route::resource('receita', ReceitaController::class);
 });
 
 Route::post('/login',   [AuthController::class, 'login'])->name('login');
+
+route::resource('receita', ReceitaController::class);

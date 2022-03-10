@@ -15,6 +15,15 @@ class CreateReceitasTable extends Migration
     {
         Schema::create('receitas', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo', 200);
+            $table->string('imagem');
+            $table->json('ingredientes');
+            $table->longText('modo_preparo');
+            $table->string('tempo_preparo');
+            $table->integer('qtd_porcao');
+            $table->longText('observacao');
+            $table->json('categorias');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
