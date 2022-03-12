@@ -20,6 +20,9 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('receitas-component', require('./components/Receitas.vue').default);
+Vue.component('card-receita-component', require('./components/CardReceita.vue').default);
+Vue.component('receita-component', require('./components/ReceitaShow.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -21,6 +21,8 @@ class ReceitaController extends Controller
      */
     public function index(Request $request)
     {
+        $api = explode('/', $request->path())[0];
+
         $receitaRepository = new ReceitaRepository($this->receita);
 
         if ( $request->has('filtro') ) {
@@ -32,8 +34,15 @@ class ReceitaController extends Controller
         if ( $request->has('atributos') ) {
             $receitaRepository->selectAtributos($request->atributos);
         }
+
+        if ($api == 'api') {
+            return response()->json($receitaRepository->getResultadoPaginado(4), 200);
+        }else {
+            return view('app.receitas', [
+                'receitas' => $receitaRepository->getResultadoPaginado(4)
+            ]);
+        }
         
-        return response()->json($receitaRepository->getResultadoPaginado(4), 200);
     }
 
     /**
@@ -80,15 +89,24 @@ class ReceitaController extends Controller
      * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $api = explode('/', $request->path())[0];
+
         $receita = $this->receita->find($id);
 
         if ($receita === null) {
             return response()->json(['erro' => 'Receita não encontrada'], 404);
         }
 
-        return response()->json($receita, 200);
+        if ($api == 'api') {
+            return response()->json($receita, 200);
+        } else {
+            return view('app.receitaShow', [
+                'receita' => $receita
+            ]);
+        }
+        
     }
 
     /**
